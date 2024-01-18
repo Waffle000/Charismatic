@@ -181,7 +181,7 @@ fun EditImageLayout(
             Column(modifier = Modifier.fillMaxHeight()) {
                 UniversalTopBar(name = "Edit Background Image", navController = navController)
                 EditTextForm(
-                    title = "Judul Copywritting",
+                    title = "Judul Edit Background Image",
                     value = productTitle,
                     onValueChange = onValueProductTitleChange
                 )
