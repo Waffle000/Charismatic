@@ -191,7 +191,7 @@ fun HomeLayout(
             }
             Spacer(modifier = Modifier.size(16.dp))
             Box(modifier = Modifier.weight(1f).clickable(onClick = onHistoryButtonClicked)) {
-                HomeMenu(value = "Riwayat", image = R.drawable.ill_menu_history)
+                HomeMenu(value = "History", image = R.drawable.ill_menu_history)
             }
         }
     }

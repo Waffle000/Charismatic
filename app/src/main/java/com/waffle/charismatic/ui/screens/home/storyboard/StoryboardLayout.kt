@@ -77,12 +77,12 @@ fun StoryboardLayout(
                     .padding(bottom = 16.dp)
                     .weight(1f)
             ) {
-                EditTextForm(title = "Judul Video", value = productTitle, onValueChange = onValueProductTitleChange)
-                EditTextForm(title = "Nama Brand", value = brandName, onValueChange = onValueBrandNameChange)
-                EditTextForm(title = "Jenis Produk", value = productType, onValueChange = onValueProductTypeChange)
-                EditTextForm(title = "Target Pasar", value = marketTarget, onValueChange = onValueMarketTargetChange)
-                MultilineEditTextForm(title = "Keunggulan Produk", value = superiority, onValueChange = onValueSuperiorityChange)
-                EditTextForm(title = "Durasi Video", value = duration, onValueChange = onValueDurationChange)
+                EditTextForm(title = "Video Title", value = productTitle, onValueChange = onValueProductTitleChange)
+                EditTextForm(title = "Brand Name", value = brandName, onValueChange = onValueBrandNameChange)
+                EditTextForm(title = "Product Type", value = productType, onValueChange = onValueProductTypeChange)
+                EditTextForm(title = "Target Market", value = marketTarget, onValueChange = onValueMarketTargetChange)
+                MultilineEditTextForm(title = "Product Advantages", value = superiority, onValueChange = onValueSuperiorityChange)
+                EditTextForm(title = "Video Duration (Second)", value = duration, onValueChange = onValueDurationChange)
             }
 
             Button(onClick = onGenerateButtonClicked, modifier = Modifier

@@ -143,11 +143,11 @@ fun CopywrittingLayout(
                     .padding(bottom = 16.dp)
                     .weight(1f)
             ) {
-                EditTextForm(title = "Judul Copywritting", value = productTitle, onValueChange = onValueProductTitleChange)
-                EditTextForm(title = "Nama Brand", value = brandName, onValueChange = onValueBrandNameChange)
-                EditTextForm(title = "Jenis Produk", value = productType, onValueChange = onValueProductTypeChange)
-                EditTextForm(title = "Target Pasar", value = marketTarget, onValueChange = onValueMarketTargetChange)
-                MultilineEditTextForm(title = "Keunggulan Produk", value = superiority, onValueChange = onValueSuperiorityChange)
+                EditTextForm(title = "Copywriting Title", value = productTitle, onValueChange = onValueProductTitleChange)
+                EditTextForm(title = "Brand Name", value = brandName, onValueChange = onValueBrandNameChange)
+                EditTextForm(title = "Product Type", value = productType, onValueChange = onValueProductTypeChange)
+                EditTextForm(title = "Target Market", value = marketTarget, onValueChange = onValueMarketTargetChange)
+                MultilineEditTextForm(title = "Product Advantages", value = superiority, onValueChange = onValueSuperiorityChange)
                 Box(
                     modifier = Modifier
                         .padding(16.dp)
