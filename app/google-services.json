@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "486443363784",
+    "project_id": "charismatic-a366b",
+    "storage_bucket": "charismatic-a366b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486443363784:android:d15ae9367fbfafcc8b24fd",
+        "android_client_info": {
+          "package_name": "com.waffle.charismatic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486443363784-6qjvfr1eaccfh8i60vnmkh93mlmph7jt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.waffle.charismatic",
+            "certificate_hash": "2a0723b8a5542e991e107faa2e76abf28eaf5b86"
+          }
+        },
+        {
+          "client_id": "486443363784-uc5rftc2prusqmgk1jdn0kl399ua1a4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdUADNKhwoOcW8LqA4DvDHoopufFCVJrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486443363784-uc5rftc2prusqmgk1jdn0kl399ua1a4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
