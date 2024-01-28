@@ -2,6 +2,7 @@ package com.waffle.charismatic.ui.screens.home.copywritting
 
 import android.content.res.Configuration
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,11 +32,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.waffle.charismatic.R
 import com.waffle.charismatic.data.response.CopywrittingResponse
 import com.waffle.charismatic.domain.model.Detail
 import com.waffle.charismatic.ui.components.EditTextForm
@@ -88,6 +91,7 @@ fun CopywrittingDetailLayout(
                         .verticalScroll(rememberScrollState()),
                 )
 
+                Image(painter = painterResource(id = R.drawable.ill_menu_copywritter), contentDescription = null)
                 Icon(
                     Icons.Outlined.CopyAll,
                     contentDescription = "Icon Copy",
