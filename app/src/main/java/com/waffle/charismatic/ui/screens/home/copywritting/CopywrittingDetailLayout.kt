@@ -91,7 +91,7 @@ fun CopywrittingDetailLayout(
                         .verticalScroll(rememberScrollState()),
                 )
 
-                Image(painter = painterResource(id = R.drawable.ill_menu_copywritter), contentDescription = null)
+
                 Icon(
                     Icons.Outlined.CopyAll,
                     contentDescription = "Icon Copy",
