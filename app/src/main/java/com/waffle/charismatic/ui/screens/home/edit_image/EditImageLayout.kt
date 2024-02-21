@@ -38,6 +38,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
@@ -68,7 +69,6 @@ fun EditImageLayout(
     backgroundDesc: String,
     onValueBackgroundDescChange: (String) -> Unit,
     onValueImageChange: (Uri) -> Unit,
-    onValueMaskChange: (Uri) -> Unit,
     onGenerateButtonClicked: () -> Unit,
     onSuccess: (Detail) -> Unit,
     onFailed: (String) -> Unit,
@@ -76,26 +76,15 @@ fun EditImageLayout(
 ) {
     var showDialog by remember { mutableStateOf(false) }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
-    var imageBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var isLoadingDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val remover = RemoveBg(context)
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 isLoadingDialog = true
                 imageUri = it.data?.data
-                CoroutineScope(Dispatchers.IO).launch {
-                    it.data?.data?.let {
-                        uriToBitmap(context, it)?.let {
-                            remover.clearBackground(it).collect { output ->
-                                imageBitmap = output
-                            }
-                        }
-                    }
-                    isLoadingDialog = false
-                }
                 showDialog = true
+                isLoadingDialog = false
             }
         }
 
@@ -122,29 +111,21 @@ fun EditImageLayout(
                 if (isLoadingDialog) {
                     LottieAnimation(composition = composition)
                 } else {
-                    imageBitmap?.asImageBitmap()?.let {
-                        Image(
-                            bitmap = it,
-                            contentDescription = "Selected Image",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                        )
-                    }
+                    AsyncImage(
+                        imageUri,
+                        contentDescription = "Selected Image",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    )
+
                 }
 
                 Button(
                     onClick = {
-                        imageBitmap?.let {
-                            saveBitmapAndGetUri(context, it, timeStamp)
-                        }?.let {
-                            fileName = getFileName(context, it).toString()
-                            imageUri?.let { it1 -> onValueImageChange(it1) }
-                            onValueMaskChange(
-                                it
-                            )
-                            showDialog = false
-                        }
+                        fileName = imageUri?.let { getFileName(context, it).toString() }.toString()
+                        imageUri?.let { it1 -> onValueImageChange(it1) }
+                        showDialog = false
                     }, modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 32.dp)

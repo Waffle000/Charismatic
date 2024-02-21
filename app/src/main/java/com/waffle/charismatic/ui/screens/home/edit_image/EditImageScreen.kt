@@ -27,7 +27,6 @@ fun EditImageScreen(navController: NavController, uiState: UiState, onEditImageI
     var productTitle by remember { mutableStateOf("") }
     var backgroundDesc by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
-    var maskUri by remember { mutableStateOf<Uri?>(null) }
     val context = LocalContext.current
 
     EditImageLayout(
@@ -43,9 +42,6 @@ fun EditImageScreen(navController: NavController, uiState: UiState, onEditImageI
         onValueImageChange = {
             imageUri = it
         },
-        onValueMaskChange = {
-            maskUri = it
-        },
         onGenerateButtonClicked = {
             val prompt = createPartFromString(backgroundDesc)
             val title = createPartFromString(productTitle)
@@ -60,19 +56,7 @@ fun EditImageScreen(navController: NavController, uiState: UiState, onEditImageI
                     )
                 }
             }
-            val requestMaskFile =
-                maskUri?.let { uriToFile(it, context).asRequestBody("image/png".toMediaTypeOrNull()) }
-            val maskMultipart = requestMaskFile.let { it1 ->
-                it1?.let {
-                    MultipartBody.Part.createFormData(
-                        "mask",
-                        maskUri?.let { getFileName(context, it) }.toString(),
-                        it
-                    )
-                }
-            }
-
-            onEditImageIntent(EditImageIntent.PostCreateEditImage(prompt, title, imageMultipart, maskMultipart))
+            onEditImageIntent(EditImageIntent.PostCreateEditImage(prompt, title, imageMultipart))
         },
         onSuccess = {detail ->
             val json = Uri.encode(Gson().toJson(detail))

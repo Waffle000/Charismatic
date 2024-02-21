@@ -29,7 +29,6 @@ fun CopywrittingScreen(navController: NavController, uiState: UiState, onCopywri
     var productType by remember { mutableStateOf("") }
     var marketTarget by remember { mutableStateOf("") }
     var superiority by remember { mutableStateOf("") }
-    var imageUri by remember { mutableStateOf<Uri?>(null) }
     val context = LocalContext.current
     CopywrittingLayout(navController = navController,
         uiState = uiState,
@@ -53,9 +52,6 @@ fun CopywrittingScreen(navController: NavController, uiState: UiState, onCopywri
         onValueSuperiorityChange = {
             superiority = it
         },
-        onValueImageChange = {
-            imageUri = it
-        },
         onGenerateButtonClicked = {
             Log.e("TAG", "CopywrittingScreen: SAMPE SINI", )
             val titlePart = createPartFromString(productTitle)
@@ -63,19 +59,8 @@ fun CopywrittingScreen(navController: NavController, uiState: UiState, onCopywri
             val productTypePart = createPartFromString(productType)
             val marketTargetPart = createPartFromString(marketTarget)
             val superiorityPart = createPartFromString(superiority)
-            val requestImageFile =
-                imageUri?.let { uriToFile(it, context).asRequestBody("image/png".toMediaTypeOrNull()) }
-            val imageMultipart = requestImageFile.let { it1 ->
-                it1?.let {
-                    MultipartBody.Part.createFormData(
-                        "product_image",
-                        imageUri?.let { getFileName(context, it) }.toString(),
-                        it
-                    )
-                }
-            }
 
-            onCopywrittingIntent(CopywrittingIntent.PostCopywritting(titlePart, brandNamePart, productTypePart, marketTargetPart, superiorityPart, imageMultipart))
+            onCopywrittingIntent(CopywrittingIntent.PostCopywritting(titlePart, brandNamePart, productTypePart, marketTargetPart, superiorityPart))
         },
         onSuccess = {detail->
             val jsonDetail = Uri.encode(Gson().toJson(detail))

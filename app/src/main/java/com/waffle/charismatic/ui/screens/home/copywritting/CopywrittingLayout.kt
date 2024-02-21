@@ -65,56 +65,12 @@ fun CopywrittingLayout(
     onValueMarketTargetChange: (String) -> Unit,
     superiority: String,
     onValueSuperiorityChange: (String) -> Unit,
-    onValueImageChange: (Uri) -> Unit,
     onGenerateButtonClicked: () -> Unit,
     onSuccess: (Detail) -> Unit,
     onFailed: (String) -> Unit,
     onLoading: @Composable () -> Unit
 ) {
-    var showDialog by remember { mutableStateOf(false) }
-    var imageUri by remember { mutableStateOf<Uri?>(null) }
-    val launcher =
-        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                imageUri = it.data?.data
-                showDialog = true
-            }
-        }
-
     val context = LocalContext.current
-
-    var fileName by remember { mutableStateOf("Empty Image") }
-
-    if (showDialog) {
-        Dialog(onDismissRequest = { }) {
-            Column {
-                Image(
-                    painter = rememberAsyncImagePainter(imageUri),
-                    contentDescription = "Selected Image",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                )
-
-                Button(
-                    onClick = {
-                        showDialog = false
-                        fileName = imageUri?.let { getFileName(context, it) }.toString()
-                        imageUri?.let { onValueImageChange(it) }
-                    }, modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 32.dp)
-                ) {
-                    Text(
-                        "Choose Image",
-                        color = MaterialTheme.colorScheme.onSecondary,
-                        modifier = Modifier.padding(8.dp)
-                    )
-                }
-            }
-
-        }
-    }
 
     if (uiState.isError.isNotBlank()) {
         onFailed(uiState.isError)
@@ -148,47 +104,6 @@ fun CopywrittingLayout(
                 EditTextForm(title = "Product Type", value = productType, onValueChange = onValueProductTypeChange)
                 EditTextForm(title = "Target Market", value = marketTarget, onValueChange = onValueMarketTargetChange)
                 MultilineEditTextForm(title = "Product Advantages", value = superiority, onValueChange = onValueSuperiorityChange)
-                Box(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                shape = RoundedCornerShape(4.dp)
-                            )
-                            .padding(16.dp)
-                            .fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Upload Image",
-                            color = MaterialTheme.colorScheme.onSecondary,
-                            style = bodyMedium,
-                            modifier = Modifier
-                                .background(
-                                    MaterialTheme.colorScheme.primary,
-                                    RoundedCornerShape(4.dp)
-                                )
-                                .padding(8.dp)
-                                .clickable(onClick = {
-                                    val intent =
-                                        Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)
-                                    intent.type = "image/*"
-                                    launcher.launch(intent)
-                                })
-                        )
-
-                        Text(
-                            text = fileName,
-                            color = MaterialTheme.colorScheme.secondary,
-                            style = bodyMedium,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-                }
             }
 
             Button(

@@ -42,8 +42,7 @@ interface ApiService {
         @Part("brand_name") brandName: RequestBody,
         @Part("product_type") productType : RequestBody,
         @Part("market_target") marketTarget: RequestBody,
-        @Part("superiority") superiority: RequestBody,
-        @Part file: MultipartBody.Part?,
+        @Part("superiority") superiority: RequestBody
     ) : Response<CopywrittingResponse>
 
     @GET("v1/copywriting-project/detail/{id}")
@@ -56,8 +55,7 @@ interface ApiService {
     suspend fun postCreateEditImage(
         @Part("prompt") prompt: RequestBody,
         @Part("title") title: RequestBody,
-        @Part image: MultipartBody.Part?,
-        @Part mask: MultipartBody.Part?
+        @Part image: MultipartBody.Part?
     ) : Response<EditImageResponse>
 
     @Multipart

@@ -27,8 +27,7 @@ class CopywrittingViewModel(private val featureUseCase: FeatureUseCase) : ViewMo
                 intent.brandName,
                 intent.productType,
                 intent.marketTarget,
-                intent.superiority,
-                intent.file
+                intent.superiority
             )
 
 
@@ -41,8 +40,7 @@ class CopywrittingViewModel(private val featureUseCase: FeatureUseCase) : ViewMo
         brandName: RequestBody,
         productType: RequestBody,
         marketTarget: RequestBody,
-        superiority: RequestBody,
-        file: MultipartBody.Part?
+        superiority: RequestBody
     ) {
         CoroutineScope(Dispatchers.Main).launch {
 
@@ -51,8 +49,7 @@ class CopywrittingViewModel(private val featureUseCase: FeatureUseCase) : ViewMo
                 brandName,
                 productType,
                 marketTarget,
-                superiority,
-                file
+                superiority
             )
                 .onStart {
                     showLoading()
@@ -134,8 +131,7 @@ sealed interface CopywrittingIntent {
         val brandName: RequestBody,
         val productType: RequestBody,
         val marketTarget: RequestBody,
-        val superiority: RequestBody,
-        val file: MultipartBody.Part?
+        val superiority: RequestBody
     ) : CopywrittingIntent
 
     data class GetCopywrittingDetail(val id: Int) : CopywrittingIntent

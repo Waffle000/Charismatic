@@ -21,8 +21,7 @@ interface FeatureRepository {
         brandName: RequestBody,
         productType : RequestBody,
         marketTarget: RequestBody,
-        superiority: RequestBody,
-        file: MultipartBody.Part?
+        superiority: RequestBody
     ) : Flow<Result<CopywrittingResponse>>
 
     fun getCopywrittingDetail(
@@ -32,8 +31,7 @@ interface FeatureRepository {
     fun postCreateEditImage(
         prompt: RequestBody,
         title: RequestBody,
-        image: MultipartBody.Part?,
-        mask: MultipartBody.Part?
+        image: MultipartBody.Part?
     ) : Flow<Result<EditImageResponse>>
 
     fun postGenerateEditImage(

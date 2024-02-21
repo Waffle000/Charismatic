@@ -21,7 +21,7 @@ class EditImageViewModel(private val featureUseCase: FeatureUseCase) : ViewModel
 
     fun processIntent(intent: EditImageIntent) {
         when (intent) {
-            is EditImageIntent.PostCreateEditImage -> postCreateEditImage(intent.prompt, intent.title, intent.image, intent.mask)
+            is EditImageIntent.PostCreateEditImage -> postCreateEditImage(intent.prompt, intent.title, intent.image)
             is EditImageIntent.PostGenerateEditImage -> postGenerateEditImage(intent.id, intent.prompt)
             is EditImageIntent.GetEditImageListDetail -> getEditImageListDetail(intent.id)
             is EditImageIntent.GetEditImageDetail -> getEditImageDetail(intent.id)
@@ -31,11 +31,10 @@ class EditImageViewModel(private val featureUseCase: FeatureUseCase) : ViewModel
     private fun postCreateEditImage(
         prompt: RequestBody,
         title: RequestBody,
-        image: MultipartBody.Part?,
-        mask: MultipartBody.Part?
+        image: MultipartBody.Part?
     ) {
         CoroutineScope(Dispatchers.Main).launch {
-                featureUseCase.postCreateEditImage(prompt, title, image, mask)
+                featureUseCase.postCreateEditImage(prompt, title, image)
                     .onStart {
                         showLoading()
                     }
@@ -177,8 +176,7 @@ sealed interface EditImageIntent {
     data class PostCreateEditImage(
         val prompt: RequestBody,
         val title: RequestBody,
-        val image: MultipartBody.Part?,
-        val mask: MultipartBody.Part?
+        val image: MultipartBody.Part?
     ) : EditImageIntent
 
     data class PostGenerateEditImage(val id: Int, val prompt: RequestBody) : EditImageIntent

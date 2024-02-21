@@ -66,12 +66,11 @@ class AppRepository(private val apiService: ApiService) : UserRepository, Featur
         brandName: RequestBody,
         productType: RequestBody,
         marketTarget: RequestBody,
-        superiority: RequestBody,
-        file: MultipartBody.Part?
+        superiority: RequestBody
     ): Flow<Result<CopywrittingResponse>> {
         return flow {
             val response =
-                apiService.postCopywritting(title, brandName, productType, marketTarget, superiority, file)
+                apiService.postCopywritting(title, brandName, productType, marketTarget, superiority)
                     .body()
             if (response != null) {
                 emit(Result.success(response))
@@ -99,11 +98,10 @@ class AppRepository(private val apiService: ApiService) : UserRepository, Featur
     override fun postCreateEditImage(
         prompt: RequestBody,
         title: RequestBody,
-        image: MultipartBody.Part?,
-        mask: MultipartBody.Part?
+        image: MultipartBody.Part?
     ): Flow<Result<EditImageResponse>> {
         return flow {
-            val response = apiService.postCreateEditImage(prompt, title, image, mask).body()
+            val response = apiService.postCreateEditImage(prompt, title, image).body()
             if (response != null) {
                 emit(Result.success(response))
             } else {

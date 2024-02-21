@@ -25,9 +25,8 @@ class FeatureUseCase(private val featureRepository: FeatureRepository) {
                          brandName: RequestBody,
                          productType : RequestBody,
                          marketTarget: RequestBody,
-                         superiority: RequestBody,
-                         file: MultipartBody.Part?) : Flow<Result<CopywrittingResponse>> {
-        return featureRepository.postCopywritting(title, brandName, productType, marketTarget, superiority, file)
+                         superiority: RequestBody) : Flow<Result<CopywrittingResponse>> {
+        return featureRepository.postCopywritting(title, brandName, productType, marketTarget, superiority)
     }
 
     fun getCopywrittingDetail(
@@ -39,10 +38,9 @@ class FeatureUseCase(private val featureRepository: FeatureRepository) {
     fun postCreateEditImage(
         prompt: RequestBody,
         title: RequestBody,
-        image: MultipartBody.Part?,
-        mask: MultipartBody.Part?
+        image: MultipartBody.Part?
     ) : Flow<Result<EditImageResponse>> {
-        return featureRepository.postCreateEditImage(prompt, title, image, mask)
+        return featureRepository.postCreateEditImage(prompt, title, image)
     }
 
     fun postGenerateEditImage(
