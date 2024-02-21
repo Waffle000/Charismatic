@@ -108,9 +108,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
-    // remove bg
-    implementation("com.github.erenalpaslan:removebg:1.0.4")
-
     // lottie
     implementation ("com.airbnb.android:lottie-compose:6.3.0")
 }

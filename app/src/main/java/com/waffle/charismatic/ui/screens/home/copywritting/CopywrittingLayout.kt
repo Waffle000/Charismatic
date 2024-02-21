@@ -70,8 +70,6 @@ fun CopywrittingLayout(
     onFailed: (String) -> Unit,
     onLoading: @Composable () -> Unit
 ) {
-    val context = LocalContext.current
-
     if (uiState.isError.isNotBlank()) {
         onFailed(uiState.isError)
     }

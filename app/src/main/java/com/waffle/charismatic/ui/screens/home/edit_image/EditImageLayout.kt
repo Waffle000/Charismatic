@@ -2,11 +2,9 @@ package com.waffle.charismatic.ui.screens.home.edit_image
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -49,14 +46,7 @@ import com.waffle.charismatic.ui.components.EditTextForm
 import com.waffle.charismatic.ui.components.MultilineEditTextForm
 import com.waffle.charismatic.ui.components.UniversalTopBar
 import com.waffle.charismatic.ui.theme.bodyMedium
-import dev.eren.removebg.RemoveBg
 import getFileName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import saveBitmapAndGetUri
-import timeStamp
-import uriToBitmap
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
